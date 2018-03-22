@@ -1,0 +1,43 @@
+<!--pages/cart/cart.wxml-->
+<view class='goods-container'>
+
+  <view class='tableInfo'>
+    <view class='table'>
+      <text class='tableNum'>桌号:</text>
+      <text class='tableNumText'>{{seatNum}}</text>
+    </view>
+  </view>
+
+  <view class='remark'>
+    <text class='remarke-title'>备注</text>
+    <textarea class='remark-detail' bindinput='input'></textarea>
+  </view>
+
+  <view class='line'></view>
+
+  <view class='order-info'>
+    <view class='total'>
+      <text>总价</text>
+      <text>{{total}}</text>
+    </view>
+    <view class='cartsDetail-box'>
+      <block wx:for='{{goodsInCartsStatistics}}' wx:for-item='goodsItem'>
+        <view class='cartsDetail'>
+          <text class='goodsTitle'>{{goodsItem.detail.name}}</text>
+          <view class='priceInfo'>
+            <text class='price'>¥{{goodsItem.detail.price * goodsItem.num}}</text>
+            <view class='delete' bindtap='reduceFromCart' data-goodItem='{{goodsItem.detail}}'>-</view>
+            <view class='num'>{{goodsItem.num}}</view>
+            <view class='add' bindtap='addToCart' data-goodItem='{{goodsItem.detail}}'>+</view>
+          </view>
+        </view>
+      </block>
+    </view>
+
+    <view class='extra'>
+      <button class='continueOrder' bindtap='continueOrder'>继续点餐</button>
+      <button class='comfirmOrder' bindtap='comfirmOrder'>确认下单</button>
+    </view>
+
+  </view>
+</view>

@@ -1,0 +1,70 @@
+<!--pages/home/home.wxml-->
+<view class='container'>
+  <view class='header {{scrollDown?"hidden":""}}'>
+    <view class='logo'>
+      <image src='../../images/shop.png'></image>
+    </view>
+    <view class='shop'>{{shop.name}}</view>
+    <view class='proclamation'>公告:欢迎光临{{shop.name}}!</view>
+    <view class='line'></view>
+    <view class='notice'>凡在本店办理会员，一律享受8.8折优惠</view>
+  </view>
+
+  <view class='content'>
+    <scroll-view class='classify-container' scroll-y="true">
+      <view wx:for='{{goodList}}' wx:for-item='goodItem' class='classify {{goodItem.id==selectedID?"actived":""}}' data-id='{{goodItem.id}}' bindtap='classifyClick'>{{goodItem.classifyName}}</view>
+    </scroll-view>
+    <scroll-view class='content-container' scroll-y="true" bindscroll='onscroll' scroll-into-view='{{selectedID}}' scroll-with-animation='true'>
+      <view class='goodList-container' wx:for='{{goodList}}' wx:for-item='goodsItem'>
+        <view class='goodsItem-classifyName' id='{{goodsItem.id}}'>{{goodsItem.classifyName}}</view>
+        <view class='goodItem-container' wx:for='{{goodsItem.goodItems}}' wx:for-item='currentGoodItem'>
+          <view class='goodItem-left'>
+            <image class='goodItem-img' src='{{currentGoodItem.pic}}'></image>
+          </view>
+          <view class='goodItem-right'>
+            <view class='goodItem-info'>
+              <text class='currentGoodItem-name'>{{currentGoodItem.name}}</text>
+              <text class='currentGoodItem-sold'>月售{{currentGoodItem.sold}}</text>
+              <text class='currentGoodItem-price'>¥{{currentGoodItem.price}}</text>
+            </view>
+            <view class='currentGoodItem-add-container' bindtap='addToCart' data-goodItem='{{currentGoodItem}}'>
+              <image class='currentGoodItem-add' src='../../images/plus.png'></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!--购物车  -->
+  <view class='cart-container'>
+    <view class='cart-data'>
+      <view class='cart' bindtap='cartsDetail'>
+        <image src='../../images/cart.png' class='cart-img'></image>
+        <view class='total-price'>{{sumPrice}}</view>
+      </view>
+
+    </view>
+
+    <form bindsubmit='submit' report-submit="true">
+      <button class='comformOderBtn' form-type='submit' disabled='{{sumPrice==0}}'>点单</button>
+    </form>
+  </view>
+
+  <view wx:if='{{showCartsDetail}}' class='cartsDetail-container'>
+    <view class='cartsDetailMask' bindtap='hideCartsDetail'></view>
+    <view class='cartsDetail-box'>
+      <block wx:for='{{goodsInCartsStatistics}}' wx:for-item='goodsItem'>
+        <view class='cartsDetail'>
+          <text class='goodsTitle'>{{goodsItem.detail.name}}</text>
+          <view class='priceInfo'>
+            <text class='price'>¥{{goodsItem.detail.price * goodsItem.num}}</text>
+            <view class='delete' bindtap='reduceFromCart' data-goodItem='{{goodsItem.detail}}'>-</view>
+            <view class='num'>{{goodsItem.num}}</view>
+            <view class='add' bindtap='addToCart' data-goodItem='{{goodsItem.detail}}'>+</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

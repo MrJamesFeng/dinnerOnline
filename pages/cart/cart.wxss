@@ -1,0 +1,69 @@
+/* pages/cart/cart.wxss */
+@import "../home/home.wxss";
+
+.goods-container {
+  height: 100%;
+}
+
+.tableInfo {
+  font-size: 16px;
+  padding: 40rpx 0 0 30rpx;
+  font-family: "微软雅黑";
+  width: 100%;
+}
+
+.table {
+  margin-top: 0rpx;
+  display: flex;
+}
+
+.tableNum {
+  width: 80rpx;
+}
+
+.tableNumText {
+  color: red;
+}
+
+.remark {
+  padding: 10rpx;
+}
+
+.remark-detail {
+  border: 1px solid blue;
+  width: 100%;
+  height: 240rpx;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  color: gray;
+}
+
+.extra {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.extra button {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 48px;
+  display: inline-block;
+  background-color: #eee;
+  text-align: center;
+  line-height: 48px;
+  font-size: 20px;
+}
+
+.continueOrder {
+
+}
+.comfirmOrder{
+  background-color:#58401f;
+}
